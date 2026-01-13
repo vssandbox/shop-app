@@ -15,13 +15,23 @@ function useShoppingList() {
     _s();
     const [items, setItems] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])([]);
     const [isLoaded, setIsLoaded] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
-    // Load from localStorage on mount
+    // Load from localStorage on mount (with migration for old data format)
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "useShoppingList.useEffect": ()=>{
             try {
                 const stored = localStorage.getItem(STORAGE_KEY);
                 if (stored) {
-                    setItems(JSON.parse(stored));
+                    const parsed = JSON.parse(stored);
+                    // Migrate old items that have 'price' instead of 'basePrice'
+                    const migrated = parsed.map({
+                        "useShoppingList.useEffect.migrated": (item)=>({
+                                ...item,
+                                basePrice: item.basePrice ?? item.price ?? 0,
+                                unit: item.unit ?? "each",
+                                quantity: item.quantity ?? 1
+                            })
+                    }["useShoppingList.useEffect.migrated"]);
+                    setItems(migrated);
                 }
             } catch (error) {
                 console.error("Failed to load shopping list:", error);
@@ -54,8 +64,10 @@ function useShoppingList() {
                     }["useShoppingList.useCallback[addItem]"])) {
                         return prev;
                     }
+                    const initialQuantity = deal.unit === "lb" ? 1 : 1;
                     const newItem = {
                         ...deal,
+                        quantity: initialQuantity,
                         addedAt: Date.now()
                     };
                     return [
@@ -75,16 +87,41 @@ function useShoppingList() {
             }["useShoppingList.useCallback[removeItem]"]);
         }
     }["useShoppingList.useCallback[removeItem]"], []);
+    const updateQuantity = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCallback"])({
+        "useShoppingList.useCallback[updateQuantity]": (id, newQuantity)=>{
+            if (newQuantity <= 0) {
+                setItems({
+                    "useShoppingList.useCallback[updateQuantity]": (prev)=>prev.filter({
+                            "useShoppingList.useCallback[updateQuantity]": (item)=>item.id !== id
+                        }["useShoppingList.useCallback[updateQuantity]"])
+                }["useShoppingList.useCallback[updateQuantity]"]);
+            } else {
+                setItems({
+                    "useShoppingList.useCallback[updateQuantity]": (prev)=>prev.map({
+                            "useShoppingList.useCallback[updateQuantity]": (item)=>item.id === id ? {
+                                    ...item,
+                                    quantity: newQuantity
+                                } : item
+                        }["useShoppingList.useCallback[updateQuantity]"])
+                }["useShoppingList.useCallback[updateQuantity]"]);
+            }
+        }
+    }["useShoppingList.useCallback[updateQuantity]"], []);
     const itemIds = new Set(items.map((item)=>item.id));
+    const cartTotal = items.reduce((sum, item)=>sum + item.basePrice * item.quantity, 0);
+    const itemCount = items.reduce((sum, item)=>sum + item.quantity, 0);
     return {
         items,
         itemIds,
         isLoaded,
         addItem,
-        removeItem
+        removeItem,
+        updateQuantity,
+        cartTotal,
+        itemCount
     };
 }
-_s(useShoppingList, "sRF7lxFqe4dxyD1OFtJCCJtdxxM=");
+_s(useShoppingList, "1n1D/s816jEm7VFPVdb1jnBQKNo=");
 if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);
 }
@@ -115,7 +152,7 @@ function ShoppingListProvider({ children }) {
         children: children
     }, void 0, false, {
         fileName: "[project]/components/ShoppingListProvider.tsx",
-        lineNumber: 21,
+        lineNumber: 24,
         columnNumber: 5
     }, this);
 }
@@ -251,16 +288,16 @@ var _s = __turbopack_context__.k.signature();
 ;
 function TabNavigationClient() {
     _s();
-    const { items } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ShoppingListProvider$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useShoppingListContext"])();
+    const { itemCount } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ShoppingListProvider$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useShoppingListContext"])();
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$TabNavigation$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
-        listCount: items.length
+        listCount: itemCount
     }, void 0, false, {
         fileName: "[project]/components/TabNavigationClient.tsx",
         lineNumber: 8,
         columnNumber: 10
     }, this);
 }
-_s(TabNavigationClient, "h946Zwr+1ozHqCzTm4lCFMbkU24=", false, function() {
+_s(TabNavigationClient, "Z+XNtKoCgsOkf6nY5ZOnOF21tYU=", false, function() {
     return [
         __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ShoppingListProvider$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useShoppingListContext"]
     ];

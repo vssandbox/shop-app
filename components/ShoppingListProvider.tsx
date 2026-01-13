@@ -10,6 +10,9 @@ interface ShoppingListContextType {
   isLoaded: boolean;
   addItem: (deal: Deal) => void;
   removeItem: (id: string) => void;
+  updateQuantity: (id: string, newQuantity: number) => void;
+  cartTotal: number;
+  itemCount: number;
 }
 
 const ShoppingListContext = createContext<ShoppingListContextType | null>(null);

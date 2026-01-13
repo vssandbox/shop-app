@@ -12,25 +12,36 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$imag
 ;
 ;
 function DealCard({ deal, isInList, onAdd }) {
+    const displayPrice = deal.unit === "lb" ? `$${deal.basePrice.toFixed(2)} / lb` : `$${deal.basePrice.toFixed(2)}`;
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-        className: "flex items-center bg-white rounded-lg shadow-sm p-3 gap-3",
+        className: "flex items-center bg-white rounded-xl shadow-sm p-3 gap-3",
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "relative w-20 h-20 flex-shrink-0",
-                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
-                    src: deal.imageUrl,
-                    alt: deal.name,
-                    fill: true,
-                    className: "object-cover rounded-md",
-                    sizes: "80px"
-                }, void 0, false, {
-                    fileName: "[project]/components/DealCard.tsx",
-                    lineNumber: 16,
-                    columnNumber: 9
-                }, this)
-            }, void 0, false, {
+                children: [
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
+                        src: deal.imageUrl,
+                        alt: deal.name,
+                        fill: true,
+                        className: "object-cover rounded-lg",
+                        sizes: "80px"
+                    }, void 0, false, {
+                        fileName: "[project]/components/DealCard.tsx",
+                        lineNumber: 20,
+                        columnNumber: 9
+                    }, this),
+                    deal.isDiscounted && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                        className: "absolute -top-1 -left-1 text-lg",
+                        children: "🔥"
+                    }, void 0, false, {
+                        fileName: "[project]/components/DealCard.tsx",
+                        lineNumber: 28,
+                        columnNumber: 11
+                    }, this)
+                ]
+            }, void 0, true, {
                 fileName: "[project]/components/DealCard.tsx",
-                lineNumber: 15,
+                lineNumber: 19,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -41,15 +52,32 @@ function DealCard({ deal, isInList, onAdd }) {
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             className: "flex-1 min-w-0",
                             children: [
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                    className: "text-lg font-bold text-green-600",
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    className: "flex items-center gap-2",
                                     children: [
-                                        "$",
-                                        deal.price.toFixed(2)
+                                        deal.isDiscounted && deal.originalPrice && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                            className: "text-sm text-gray-400 line-through",
+                                            children: [
+                                                "$",
+                                                deal.originalPrice.toFixed(2)
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "[project]/components/DealCard.tsx",
+                                            lineNumber: 36,
+                                            columnNumber: 17
+                                        }, this),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                            className: `text-lg font-bold ${deal.isDiscounted ? "text-red-500" : "text-green-600"}`,
+                                            children: displayPrice
+                                        }, void 0, false, {
+                                            fileName: "[project]/components/DealCard.tsx",
+                                            lineNumber: 40,
+                                            columnNumber: 15
+                                        }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/DealCard.tsx",
-                                    lineNumber: 27,
+                                    lineNumber: 34,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -57,41 +85,49 @@ function DealCard({ deal, isInList, onAdd }) {
                                     children: deal.name
                                 }, void 0, false, {
                                     fileName: "[project]/components/DealCard.tsx",
-                                    lineNumber: 30,
+                                    lineNumber: 44,
                                     columnNumber: 13
+                                }, this),
+                                deal.size && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                    className: "text-xs text-gray-500",
+                                    children: deal.size
+                                }, void 0, false, {
+                                    fileName: "[project]/components/DealCard.tsx",
+                                    lineNumber: 46,
+                                    columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/DealCard.tsx",
-                            lineNumber: 26,
+                            lineNumber: 33,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                             onClick: ()=>onAdd(deal),
                             disabled: isInList,
-                            className: `flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-lg font-bold transition-colors ${isInList ? "bg-gray-200 text-gray-400 cursor-not-allowed" : "bg-blue-500 text-white hover:bg-blue-600 active:bg-blue-700"}`,
-                            "aria-label": isInList ? "Already in list" : "Add to list",
+                            className: `flex-shrink-0 w-9 h-9 rounded-full flex items-center justify-center text-lg font-bold transition-colors ${isInList ? "bg-green-100 text-green-500" : "bg-blue-500 text-white hover:bg-blue-600 active:bg-blue-700"}`,
+                            "aria-label": isInList ? "Already in cart" : "Add to cart",
                             children: isInList ? "✓" : "+"
                         }, void 0, false, {
                             fileName: "[project]/components/DealCard.tsx",
-                            lineNumber: 32,
+                            lineNumber: 49,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/components/DealCard.tsx",
-                    lineNumber: 25,
+                    lineNumber: 32,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/components/DealCard.tsx",
-                lineNumber: 24,
+                lineNumber: 31,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/components/DealCard.tsx",
-        lineNumber: 14,
+        lineNumber: 18,
         columnNumber: 5
     }, this);
 }
@@ -148,62 +184,87 @@ const mockDeals = [
     {
         id: "1",
         name: "Wireless Bluetooth Headphones",
-        price: 49.99,
-        imageUrl: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=200&h=200&fit=crop"
+        basePrice: 49.99,
+        originalPrice: 79.99,
+        imageUrl: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=200&h=200&fit=crop",
+        unit: "each",
+        isDiscounted: true
     },
     {
         id: "2",
         name: "Portable Phone Charger",
-        price: 24.99,
-        imageUrl: "https://images.unsplash.com/photo-1609091839311-d5365f9ff1c5?w=200&h=200&fit=crop"
+        basePrice: 24.99,
+        imageUrl: "https://images.unsplash.com/photo-1609091839311-d5365f9ff1c5?w=200&h=200&fit=crop",
+        unit: "each",
+        size: "10000mAh"
     },
     {
         id: "3",
         name: "Smart Watch Fitness Tracker",
-        price: 79.99,
-        imageUrl: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=200&h=200&fit=crop"
+        basePrice: 79.99,
+        originalPrice: 129.99,
+        imageUrl: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=200&h=200&fit=crop",
+        unit: "each",
+        isDiscounted: true
     },
     {
         id: "4",
         name: "LED Desk Lamp",
-        price: 34.99,
-        imageUrl: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=200&h=200&fit=crop"
+        basePrice: 34.99,
+        imageUrl: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=200&h=200&fit=crop",
+        unit: "each",
+        size: "Adjustable"
     },
     {
         id: "5",
-        name: "Insulated Water Bottle",
-        price: 19.99,
-        imageUrl: "https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=200&h=200&fit=crop"
+        name: "Organic Coffee Beans",
+        basePrice: 12.99,
+        imageUrl: "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=200&h=200&fit=crop",
+        unit: "lb",
+        size: "Medium Roast"
     },
     {
         id: "6",
         name: "Mechanical Keyboard",
-        price: 89.99,
-        imageUrl: "https://images.unsplash.com/photo-1511467687858-23d96c32e4ae?w=200&h=200&fit=crop"
+        basePrice: 89.99,
+        originalPrice: 119.99,
+        imageUrl: "https://images.unsplash.com/photo-1511467687858-23d96c32e4ae?w=200&h=200&fit=crop",
+        unit: "each",
+        isDiscounted: true
     },
     {
         id: "7",
         name: "Wireless Mouse",
-        price: 29.99,
-        imageUrl: "https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=200&h=200&fit=crop"
+        basePrice: 29.99,
+        imageUrl: "https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=200&h=200&fit=crop",
+        unit: "each"
     },
     {
         id: "8",
-        name: "USB-C Hub Adapter",
-        price: 39.99,
-        imageUrl: "https://images.unsplash.com/photo-1625723044792-44de16ccb4e9?w=200&h=200&fit=crop"
+        name: "Premium Almonds",
+        basePrice: 8.99,
+        originalPrice: 11.99,
+        imageUrl: "https://images.unsplash.com/photo-1508061253366-f7da158b6d46?w=200&h=200&fit=crop",
+        unit: "lb",
+        isDiscounted: true
     },
     {
         id: "9",
         name: "Noise Cancelling Earbuds",
-        price: 129.99,
-        imageUrl: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=200&h=200&fit=crop"
+        basePrice: 99.99,
+        originalPrice: 129.99,
+        imageUrl: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=200&h=200&fit=crop",
+        unit: "each",
+        size: "With Case",
+        isDiscounted: true
     },
     {
         id: "10",
         name: "Laptop Stand",
-        price: 44.99,
-        imageUrl: "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=200&h=200&fit=crop"
+        basePrice: 44.99,
+        imageUrl: "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=200&h=200&fit=crop",
+        unit: "each",
+        size: "Aluminum"
     }
 ];
 }),

@@ -2,37 +2,53 @@
 
 import Image from "next/image";
 import { ShoppingListItem as ShoppingListItemType } from "@/types";
+import QuantityStepper from "./QuantityStepper";
 
 interface ShoppingListItemProps {
   item: ShoppingListItemType;
-  onRemove: (id: string) => void;
+  onQuantityChange: (id: string, newQuantity: number) => void;
 }
 
-export default function ShoppingListItem({ item, onRemove }: ShoppingListItemProps) {
+export default function ShoppingListItem({ item, onQuantityChange }: ShoppingListItemProps) {
+  const displayPrice = item.unit === "lb"
+    ? `$${item.basePrice.toFixed(2)} / lb`
+    : `$${item.basePrice.toFixed(2)}`;
+
   return (
-    <div className="flex items-center bg-white rounded-lg shadow-sm p-3 gap-3">
-      <div className="relative w-16 h-16 flex-shrink-0">
+    <div className="flex items-center bg-white rounded-xl shadow-sm p-3 gap-3">
+      <div className="relative w-[60px] h-[60px] flex-shrink-0">
         <Image
           src={item.imageUrl}
           alt={item.name}
           fill
-          className="object-cover rounded-md"
-          sizes="64px"
+          className="object-cover rounded-lg"
+          sizes="60px"
         />
       </div>
       <div className="flex-1 min-w-0">
-        <p className="text-sm text-gray-800 truncate">{item.name}</p>
-        <p className="text-base font-bold text-green-600">
-          ${item.price.toFixed(2)}
-        </p>
+        <p className="text-sm font-semibold text-gray-900 truncate">{item.name}</p>
+        {item.size && (
+          <p className="text-xs text-gray-500">{item.size}</p>
+        )}
+        <div className="flex items-center gap-2 mt-1">
+          {item.isDiscounted && (
+            <>
+              <span className="text-sm">🔥</span>
+              <span className="text-xs text-gray-400 line-through">
+                ${item.originalPrice?.toFixed(2)}
+              </span>
+            </>
+          )}
+          <span className={`text-sm font-bold ${item.isDiscounted ? "text-red-500" : "text-gray-900"}`}>
+            {displayPrice}
+          </span>
+        </div>
       </div>
-      <button
-        onClick={() => onRemove(item.id)}
-        className="flex-shrink-0 w-8 h-8 rounded-full bg-red-100 text-red-500 flex items-center justify-center hover:bg-red-200 active:bg-red-300 transition-colors"
-        aria-label="Remove from list"
-      >
-        ✕
-      </button>
+      <QuantityStepper
+        value={item.quantity}
+        unit={item.unit}
+        onChange={(val) => onQuantityChange(item.id, val)}
+      />
     </div>
   );
 }

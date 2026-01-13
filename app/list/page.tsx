@@ -4,7 +4,7 @@ import ShoppingList from "@/components/ShoppingList";
 import { useShoppingListContext } from "@/components/ShoppingListProvider";
 
 export default function ListPage() {
-  const { items, removeItem, isLoaded } = useShoppingListContext();
+  const { items, updateQuantity, cartTotal, itemCount, isLoaded } = useShoppingListContext();
 
   if (!isLoaded) {
     return (
@@ -14,5 +14,12 @@ export default function ListPage() {
     );
   }
 
-  return <ShoppingList items={items} onRemove={removeItem} />;
+  return (
+    <ShoppingList
+      items={items}
+      onQuantityChange={updateQuantity}
+      cartTotal={cartTotal}
+      itemCount={itemCount}
+    />
+  );
 }

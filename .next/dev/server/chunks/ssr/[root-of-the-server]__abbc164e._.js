@@ -19,12 +19,20 @@ const STORAGE_KEY = "shopping-list";
 function useShoppingList() {
     const [items, setItems] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])([]);
     const [isLoaded, setIsLoaded] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
-    // Load from localStorage on mount
+    // Load from localStorage on mount (with migration for old data format)
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
         try {
             const stored = localStorage.getItem(STORAGE_KEY);
             if (stored) {
-                setItems(JSON.parse(stored));
+                const parsed = JSON.parse(stored);
+                // Migrate old items that have 'price' instead of 'basePrice'
+                const migrated = parsed.map((item)=>({
+                        ...item,
+                        basePrice: item.basePrice ?? item.price ?? 0,
+                        unit: item.unit ?? "each",
+                        quantity: item.quantity ?? 1
+                    }));
+                setItems(migrated);
             }
         } catch (error) {
             console.error("Failed to load shopping list:", error);
@@ -50,8 +58,10 @@ function useShoppingList() {
             if (prev.some((item)=>item.id === deal.id)) {
                 return prev;
             }
+            const initialQuantity = deal.unit === "lb" ? 1 : 1;
             const newItem = {
                 ...deal,
+                quantity: initialQuantity,
                 addedAt: Date.now()
             };
             return [
@@ -63,13 +73,28 @@ function useShoppingList() {
     const removeItem = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useCallback"])((id)=>{
         setItems((prev)=>prev.filter((item)=>item.id !== id));
     }, []);
+    const updateQuantity = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useCallback"])((id, newQuantity)=>{
+        if (newQuantity <= 0) {
+            setItems((prev)=>prev.filter((item)=>item.id !== id));
+        } else {
+            setItems((prev)=>prev.map((item)=>item.id === id ? {
+                        ...item,
+                        quantity: newQuantity
+                    } : item));
+        }
+    }, []);
     const itemIds = new Set(items.map((item)=>item.id));
+    const cartTotal = items.reduce((sum, item)=>sum + item.basePrice * item.quantity, 0);
+    const itemCount = items.reduce((sum, item)=>sum + item.quantity, 0);
     return {
         items,
         itemIds,
         isLoaded,
         addItem,
-        removeItem
+        removeItem,
+        updateQuantity,
+        cartTotal,
+        itemCount
     };
 }
 }),
@@ -97,7 +122,7 @@ function ShoppingListProvider({ children }) {
         children: children
     }, void 0, false, {
         fileName: "[project]/components/ShoppingListProvider.tsx",
-        lineNumber: 21,
+        lineNumber: 24,
         columnNumber: 5
     }, this);
 }
@@ -223,9 +248,9 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$TabNavigation$
 ;
 ;
 function TabNavigationClient() {
-    const { items } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ShoppingListProvider$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useShoppingListContext"])();
+    const { itemCount } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ShoppingListProvider$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useShoppingListContext"])();
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$TabNavigation$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
-        listCount: items.length
+        listCount: itemCount
     }, void 0, false, {
         fileName: "[project]/components/TabNavigationClient.tsx",
         lineNumber: 8,

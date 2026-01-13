@@ -1,14 +1,17 @@
+export type Unit = "each" | "lb";
+
 export interface Deal {
   id: string;
   name: string;
-  price: number;
+  basePrice: number;
+  originalPrice?: number;
   imageUrl: string;
+  unit: Unit;
+  size?: string;
+  isDiscounted?: boolean;
 }
 
-export interface ShoppingListItem {
-  id: string;
-  name: string;
-  price: number;
-  imageUrl: string;
+export interface ShoppingListItem extends Deal {
+  quantity: number;
   addedAt: number;
 }
