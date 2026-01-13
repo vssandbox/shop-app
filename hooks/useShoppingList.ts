@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import { Deal, ShoppingListItem } from "@/types";
 
 const STORAGE_KEY = "shopping-list";
@@ -47,7 +47,7 @@ export function useShoppingList() {
       if (prev.some((item) => item.id === deal.id)) {
         return prev;
       }
-      const initialQuantity = deal.unit === "lb" ? 1 : 1;
+      const initialQuantity = 1;
       const newItem: ShoppingListItem = {
         ...deal,
         quantity: initialQuantity,
@@ -73,14 +73,17 @@ export function useShoppingList() {
     }
   }, []);
 
-  const itemIds = new Set(items.map((item) => item.id));
+  const itemIds = useMemo(() => new Set(items.map((item) => item.id)), [items]);
 
-  const cartTotal = items.reduce(
-    (sum, item) => sum + item.basePrice * item.quantity,
-    0
+  const cartTotal = useMemo(
+    () => items.reduce((sum, item) => sum + item.basePrice * item.quantity, 0),
+    [items]
   );
 
-  const itemCount = items.reduce((sum, item) => sum + item.quantity, 0);
+  const itemCount = useMemo(
+    () => items.reduce((sum, item) => sum + item.quantity, 0),
+    [items]
+  );
 
   return {
     items,

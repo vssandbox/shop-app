@@ -1,7 +1,13 @@
 import type { Metadata, Viewport } from "next";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import { ShoppingListProvider } from "@/components/ShoppingListProvider";
 import TabNavigationClient from "@/components/TabNavigationClient";
+
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
 
 export const metadata: Metadata = {
   title: "Shop App",
@@ -20,10 +26,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className="min-h-screen bg-gray-100">
+    <html lang="en" className={inter.className}>
+      <body className="min-h-screen" style={{ backgroundColor: "var(--color-background)" }}>
         <ShoppingListProvider>
-          <main className="max-w-md mx-auto bg-gray-50 min-h-screen">
+          <main className="max-w-md mx-auto min-h-screen" style={{ backgroundColor: "var(--color-background)" }}>
             {children}
           </main>
           <TabNavigationClient />

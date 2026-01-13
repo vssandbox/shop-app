@@ -15,33 +15,50 @@ export default function ShoppingListItem({ item, onQuantityChange }: ShoppingLis
     : `$${item.basePrice.toFixed(2)}`;
 
   return (
-    <div className="flex items-center bg-white rounded-xl shadow-sm p-3 gap-3">
-      <div className="relative w-[60px] h-[60px] flex-shrink-0">
+    <div
+      className="flex items-center py-4 gap-4"
+      style={{ borderBottom: "1px solid var(--color-border)" }}
+    >
+      <div className="relative w-16 h-16 flex-shrink-0">
         <Image
           src={item.imageUrl}
           alt={item.name}
           fill
-          className="object-cover rounded-lg"
-          sizes="60px"
+          className="object-cover rounded-md"
+          sizes="64px"
         />
       </div>
       <div className="flex-1 min-w-0">
-        <p className="text-sm font-semibold text-gray-900 truncate">{item.name}</p>
-        {item.size && (
-          <p className="text-xs text-gray-500">{item.size}</p>
-        )}
+        <p
+          className="text-sm font-medium truncate"
+          style={{ color: "var(--color-text-primary)" }}
+        >
+          {item.name}
+        </p>
         <div className="flex items-center gap-2 mt-1">
-          {item.isDiscounted && (
-            <>
-              <span className="text-sm">🔥</span>
-              <span className="text-xs text-gray-400 line-through">
-                ${item.originalPrice?.toFixed(2)}
-              </span>
-            </>
+          {item.size && (
+            <span
+              className="text-sm"
+              style={{ color: "var(--color-text-muted)" }}
+            >
+              {item.size}
+            </span>
           )}
-          <span className={`text-sm font-bold ${item.isDiscounted ? "text-red-500" : "text-gray-900"}`}>
+          {item.size && <span style={{ color: "var(--color-text-muted)" }}>·</span>}
+          <span
+            className="text-sm font-medium"
+            style={{ color: item.isDiscounted ? "var(--color-discount)" : "var(--color-text-primary)" }}
+          >
             {displayPrice}
           </span>
+          {item.isDiscounted && item.originalPrice && (
+            <span
+              className="text-sm line-through"
+              style={{ color: "var(--color-text-muted)" }}
+            >
+              ${item.originalPrice.toFixed(2)}
+            </span>
+          )}
         </div>
       </div>
       <QuantityStepper

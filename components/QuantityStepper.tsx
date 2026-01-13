@@ -28,20 +28,28 @@ export default function QuantityStepper({ value, unit, onChange }: QuantityStepp
   };
 
   return (
-    <div className="flex items-center gap-1 bg-gray-100 rounded-full">
+    <div
+      className="flex items-center rounded-full"
+      style={{ border: "1px solid var(--color-border)" }}
+    >
       <button
         onClick={handleDecrement}
-        className="w-8 h-8 flex items-center justify-center rounded-full bg-white shadow-sm text-gray-600 hover:bg-gray-50 active:bg-gray-100 font-bold"
+        className="w-8 h-8 flex items-center justify-center text-base font-medium transition-colors duration-150"
+        style={{ color: "var(--color-text-muted)" }}
         aria-label="Decrease quantity"
       >
         −
       </button>
-      <span className="min-w-[3rem] text-center text-sm font-medium">
+      <span
+        className="min-w-[2.5rem] text-center text-sm font-medium"
+        style={{ color: "var(--color-text-primary)" }}
+      >
         {displayValue}
       </span>
       <button
         onClick={handleIncrement}
-        className="w-8 h-8 flex items-center justify-center rounded-full bg-white shadow-sm text-gray-600 hover:bg-gray-50 active:bg-gray-100 font-bold"
+        className="w-8 h-8 flex items-center justify-center text-base font-medium transition-colors duration-150"
+        style={{ color: "var(--color-text-primary)" }}
         aria-label="Increase quantity"
       >
         +
